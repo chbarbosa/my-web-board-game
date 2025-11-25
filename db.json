@@ -1,8 +1,12 @@
 {
-  "games": [
-    { "id": "A1B2C3D4E5", "status": "active", "playerCount": 1 },
-    { "id": "F6G7H8I9J0", "status": "active", "playerCount": 2 },
-    { "id": "K1L2M3N4O5", "status": "finished", "playerCount": 2 },
-    { "id": "P6Q7R8S9T0", "status": "active", "playerCount": 1 }
+  "users": [
+    {
+      "id": "JZB2VSI96LC",
+      "name": "Test Player One",
+      "email": "player1@test.com",
+      "country": "CA",
+      "password": "$2b$10$u3NvuISuxRjbKLZoaq7l4elFDx5Bi06AiITtEf3Vhk7/zD3Osu19i",
+      "status": "confirmed"
+    }
   ]
 }

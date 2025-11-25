@@ -1,0 +1,40 @@
+### Register a New User
+POST http://localhost:3001/api/users/register
+Content-Type: application/json
+
+{
+    "name": "Test Player One",
+    "email": "player1@test.com",
+    "country": "CA",
+    "password": "SecurePassword123"
+}
+
+### Confirm Registration (Use code from db.json)
+POST http://localhost:3001/api/users/confirm
+Content-Type: application/json
+
+{
+    "email": "player1@test.com",
+    "code": "BGN5K" 
+}
+
+### Login Authenticated User
+POST http://localhost:3001/api/users/login
+Content-Type: application/json
+
+{
+    "email": "player1@test.com",
+    "password": "SecurePassword123"
+}
+
+// NOTE: You must get the 12-character hidden key (ID) from the response 
+// or from db.json for the next test!
+
+### Invite User (Requires sender's ID for authentication)
+POST http://localhost:3001/api/users/invite
+Content-Type: application/json
+
+{
+    "senderId": "JZB2VSI96LC",
+    "recipientEmail": "player2@test.com"
+}
