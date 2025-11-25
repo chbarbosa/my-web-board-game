@@ -23,19 +23,15 @@ if (!JSON_SERVER_URL) {
 app.use(cors());
 app.use(express.json());
 
-// --- NEW API ROUTE: Get Active Game Count ---
 app.get('/api/games/count', async (req, res) => {
     console.log('Counting active games...');
     try {
-        // 1. Fetch ALL gameStates from json-server
         const response = await axios.get(`${JSON_SERVER_URL}/games`);
         const allGames = response.data;
         
-        // 2. Filter and Count the Active Games (The simple logic happens here)
         const activeGames = allGames.filter(game => game.status === 'active');
         const activeGameCount = activeGames.length;
 
-        // 3. Send the result back to the frontend
         res.json({ 
             count: activeGameCount,
             message: `There are ${activeGameCount} active games.`
