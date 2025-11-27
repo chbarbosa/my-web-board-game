@@ -26,7 +26,7 @@ const Login = ({ onLoginSuccess, onSwitchToRegister }) => {
             const response = await loginUser(formData);
             
             // --- CRITICAL STEP: Store User Identifier ---
-            const userId = response.id; 
+            const userId = response.user.id; 
             
             // In a real application, this is where you would store the ID/Token
             // using local storage, session storage, or a dedicated state manager.

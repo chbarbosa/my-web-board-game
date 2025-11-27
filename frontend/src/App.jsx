@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Register from './components/Register';
 import Login from './components/Login';
 
-// Define view constants
 const VIEWS = {
   REGISTER: 'register',
   LOGIN: 'login',
@@ -37,7 +36,7 @@ function App() {
         return (
           <Register 
             onRegistrationSuccess={handleRegistrationSuccess} 
-            onSwitchToLogin={handleSwitchToLogin} // We should add this prop to Register.jsx
+            onSwitchToLogin={handleSwitchToLogin} 
           />
         );
       case VIEWS.GAME:
