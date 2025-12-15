@@ -1,40 +1,151 @@
-### Register a New User
-POST http://localhost:3001/api/users/register
+### Base URL Definition
+@baseURL = http://localhost:3001
+
+# --- USER AUTHENTICATION & ACCOUNT ROUTES (backend/routes/user.js) ---
+
+### 1. Register a New User (Host)
+# Note: You should update the email, name, and password for each new user you register.
+POST {{baseURL}}/api/users/register
 Content-Type: application/json
 
 {
-    "name": "Test Player One",
-    "email": "player1@test.com",
-    "country": "CA",
-    "password": "SecurePassword123"
+    "name": "Carlos Host",
+    "email": "carlos.host@example.com",
+    "password": "securepassword123"
 }
 
-### Confirm Registration (Use code from db.json)
-POST http://localhost:3001/api/users/confirm
+### 2. Register a Second User (Player 2)
+POST {{baseURL}}/api/users/register
 Content-Type: application/json
 
 {
-    "email": "player1@test.com",
-    "code": "BGN5K" 
+    "name": "Anna Investigator",
+    "email": "anna.inv@example.com",
+    "password": "securepassword123"
 }
 
-### Login Authenticated User
-POST http://localhost:3001/api/users/login
+### 3. Register a Third User (Player 3)
+POST {{baseURL}}/api/users/register
 Content-Type: application/json
 
 {
-    "email": "player1@test.com",
-    "password": "SecurePassword123"
+    "name": "Ben Detective",
+    "email": "ben.det@example.com",
+    "password": "securepassword123"
 }
 
-// NOTE: You must get the 12-character hidden key (ID) from the response 
-// or from db.json for the next test!
+### 4. User Login (Host)
+# Save the Host's ID and Name to environment variables for later use
+@host_user_id = YLHNJ3PGNV
+@host_user_name = Carlos Host
 
-### Invite User (Requires sender's ID for authentication)
-POST http://localhost:3001/api/users/invite
+POST {{baseURL}}/api/users/login
 Content-Type: application/json
 
 {
-    "senderId": "JZB2VSI96LC",
-    "recipientEmail": "player2@test.com"
+    "email": "carlos.host@example.com",
+    "password": "securepassword123"
 }
+
+### 5. User Login (Player 2)
+@player2_user_id = ANNAID1234
+@player2_user_name = Anna Investigator
+
+POST {{baseURL}}/api/users/login
+Content-Type: application/json
+
+{
+    "email": "anna.inv@example.com",
+    "password": "securepassword123"
+}
+
+# --- GAME LOBBY & SETUP ROUTES (backend/routes/game.js) ---
+
+### 6. Create Game (Host Action)
+# Save the returned Game Code to an environment variable
+@game_code = JUI3
+
+POST {{baseURL}}/api/game/create
+Content-Type: application/json
+
+{
+    "hostId": "{{host_user_id}}"
+}
+
+### 7. Join Game (Player 2 Action)
+POST {{baseURL}}/api/game/join/{{game_code}}
+Content-Type: application/json
+
+{
+    "userId": "{{player2_user_id}}"
+}
+
+### 8. Join Game (Player 3 Action)
+@player3_user_id = BENID45678
+@player3_user_name = Ben Detective
+
+POST {{baseURL}}/api/game/join/{{game_code}}
+Content-Type: application/json
+
+{
+    "userId": "{{player3_user_id}}"
+}
+
+### 9. Get Lobby Status
+GET {{baseURL}}/api/game/lobby/{{game_code}}
+
+### 10. Start Game (Host Action)
+# Requires 3 players to be in the lobby
+POST {{baseURL}}/api/game/start/{{game_code}}
+Content-Type: application/json
+
+{
+    "hostId": "{{host_user_id}}"
+}
+
+### 11. Get Current Game State (Post-Start)
+# Used by all clients to sync the game status, roles, and turn order.
+GET {{baseURL}}/api/game/state/{{game_code}}
+
+# --- GAME ACTION ENDPOINTS (Placeholder for future implementation) ---
+
+### 12. Explore/Move Action (Placeholder)
+# NOTE: This endpoint needs implementation in game-engine.js
+# Example: Player 2 explores the Dining Room
+# POST {{baseURL}}/api/game/explore/{{game_code}}
+# Content-Type: application/json
+# 
+# {
+#     "userId": "{{player2_user_id}}",
+#     "newLocation": "Dining Room" 
+# }
+
+### 13. Defense Placement Action (Placeholder)
+# NOTE: This endpoint needs implementation in game-engine.js
+# Example: Player 2 places Salt in the Dining Room
+# POST {{baseURL}}/api/game/defend/{{game_code}}
+# Content-Type: application/json
+# 
+# {
+#     "userId": "{{player2_user_id}}",
+#     "itemUsed": "Salt",
+#     "location": "Dining Room"
+# }
+
+### 14. Engage/Win Action (Placeholder)
+# NOTE: This endpoint needs implementation in game-engine.js
+# POST {{baseURL}}/api/game/engage/{{game_code}}
+# Content-Type: application/json
+# 
+# {
+#     "userId": "{{host_user_id}}"
+# }
+
+### 15. Menace Turn (Placeholder - Engine Control)
+# NOTE: This endpoint needs implementation in game-engine.js
+# POST {{baseURL}}/api/game/menace-turn/{{game_code}}
+# Content-Type: application/json
+# 
+# {
+#     "hostId": "{{host_user_id}}"
+# }

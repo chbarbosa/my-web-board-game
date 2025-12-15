@@ -12,9 +12,86 @@ if (!JSON_SERVER_URL) {
     console.error("FATAL ERROR: JSON_SERVER_URL is not set");
     process.exit(1);
 }
+// In-memory user storage simulation (replace with database later)
+const USERS = {}; 
 
-// IMPORTANT: This is a simplified function to demonstrate hashing.
-// In a real scenario, this function would handle the database interaction via axios.
+// Simple utility for generating unique user IDs
+const generateUserId = () => {
+    return Math.random().toString(36).substring(2, 10).toUpperCase();
+};
+
+
+export const registerUser = async ({ name, email, password }) => {
+    // 1. Check if user already exists
+    if (USERS[email]) {
+        return { 
+            success: false, 
+            message: "User already exists with this email address." 
+        };
+    }
+
+    // 2. Basic validation (You would add much more here, like password hashing)
+    if (password.length < 8) {
+        return { 
+            success: false, 
+            message: "Password must be at least 8 characters long." 
+        };
+    }
+
+    // 3. Create new user record
+    const userId = generateUserId();
+    
+    // NOTE: In a real application, you MUST hash the password here (e.g., using bcrypt).
+    USERS[email] = {
+        id: userId,
+        name: name,
+        email: email,
+        password: password // UNSAFE: Replace with hashed password in production
+    };
+
+    // 4. Success response
+    console.log(`User registered: ${name} (${userId})`);
+    return { 
+        success: true, 
+        message: "Registration successful.", 
+        userId: userId 
+    };
+};
+
+export const loginUser = async ({ email, password }) => {
+    const user = USERS[email];
+
+    // 1. Check if user exists
+    if (!user) {
+        return { 
+            success: false, 
+            message: "Invalid credentials." 
+        };
+    }
+
+    // 2. Verify password
+    // NOTE: If using hashing, the check here would be: await bcrypt.compare(password, user.password)
+    if (user.password !== password) {
+        return { 
+            success: false, 
+            message: "Invalid credentials." 
+        };
+    }
+
+    // 3. Success: Return safe user data (excluding password)
+    return { 
+        success: true, 
+        message: "Login successful!", 
+        user: { 
+            id: user.id, 
+            name: user.name, 
+            email: user.email 
+        } 
+    };
+};
+
+export const USER_STORE = USERS;
+
 export const createNewUserRecord = async (name, email, country, password) => {
     // 1. Hash the incoming password
     const hashedPassword = await hashPassword(password);
