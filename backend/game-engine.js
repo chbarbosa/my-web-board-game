@@ -17,28 +17,28 @@ const INITIAL_ITEM_POOL = [
 // This serves as the template for GameState.locationMap and adjacency check
 const STATIC_LOCATION_MAP = {
     // STAGE 1
-    "Front Door": { pool: "STAGE1", defenseAllowed: true, adjacentLocations: ["Front Lawn", "Stairwell", "Dining Room"] },
-    "Dining Room": { pool: "STAGE1", defenseAllowed: true, adjacentLocations: ["Front Door", "Kitchen", "Library"] },
-    "Kitchen": { pool: "STAGE1", defenseAllowed: true, adjacentLocations: ["Dining Room", "Servant Quarters"] },
-    "Library": { pool: "STAGE1", defenseAllowed: true, adjacentLocations: ["Dining Room", "Design Studio", "Sitting Room"] },
-    "Servant Quarters": { pool: "STAGE1", defenseAllowed: true, adjacentLocations: ["Kitchen", "Wine Cellar", "Master Bedroom"] },
-    "Wine Cellar": { pool: "STAGE1", defenseAllowed: true, adjacentLocations: ["Servant Quarters", "Design Studio"] },
-    "Design Studio": { pool: "STAGE1", defenseAllowed: true, adjacentLocations: ["Library", "Wine Cellar"] },
-    "Sitting Room": { pool: "STAGE1", defenseAllowed: true, adjacentLocations: ["Library", "Stairwell"] },
-    "Stairwell": { pool: "STAGE1", defenseAllowed: true, adjacentLocations: ["Front Door", "Sitting Room", "Office"] },
+    "Front Door": { pool: "STAGE1", defenseAllowed: true},
+    "Dining Room": { pool: "STAGE1", defenseAllowed: true},
+    "Kitchen": { pool: "STAGE1", defenseAllowed: true},
+    "Library": { pool: "STAGE1", defenseAllowed: true},
+    "Servant Quarters": { pool: "STAGE1", defenseAllowed: true},
+    "Wine Cellar": { pool: "STAGE1", defenseAllowed: true},
+    "Design Studio": { pool: "STAGE1", defenseAllowed: true},
+    "Sitting Room": { pool: "STAGE1", defenseAllowed: true},
+    "Stairwell": { pool: "STAGE1", defenseAllowed: true},
     
     // STAGE 2
-    "Master Bedroom": { pool: "STAGE2", defenseAllowed: true, adjacentLocations: ["Servant Quarters", "Child Bedroom"] },
-    "Child Bedroom": { pool: "STAGE2", defenseAllowed: true, adjacentLocations: ["Master Bedroom", "Visit Bedroom"] },
-    "Visit Bedroom": { pool: "STAGE2", defenseAllowed: true, adjacentLocations: ["Child Bedroom", "Office"] },
-    "Office": { pool: "STAGE2", defenseAllowed: true, adjacentLocations: ["Stairwell", "Visit Bedroom"] },
+    "Master Bedroom": { pool: "STAGE2", defenseAllowed: true},
+    "Child Bedroom": { pool: "STAGE2", defenseAllowed: true},
+    "Visit Bedroom": { pool: "STAGE2", defenseAllowed: true},
+    "Office": { pool: "STAGE2", defenseAllowed: true},
     
     // OUTSIDE
-    "Front Lawn": { pool: "OUTSIDE", defenseAllowed: false, adjacentLocations: ["Front Door", "Back Garden"] },
-    "Back Garden": { pool: "OUTSIDE", defenseAllowed: false, adjacentLocations: ["Front Lawn", "Workshop", "Lake Shore"] },
-    "Workshop": { pool: "OUTSIDE", defenseAllowed: false, adjacentLocations: ["Back Garden", "Forest Entry"] },
-    "Lake Shore": { pool: "OUTSIDE", defenseAllowed: false, adjacentLocations: ["Back Garden"] },
-    "Forest Entry": { pool: "OUTSIDE", defenseAllowed: false, adjacentLocations: ["Workshop"] },
+    "Front Lawn": { pool: "OUTSIDE", defenseAllowed: false},
+    "Back Garden": { pool: "OUTSIDE", defenseAllowed: false},
+    "Workshop": { pool: "OUTSIDE", defenseAllowed: false},
+    "Lake Shore": { pool: "OUTSIDE", defenseAllowed: false},
+    "Forest Entry": { pool: "OUTSIDE", defenseAllowed: false},
 };
 
 // --- UTILITY ---
