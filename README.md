@@ -26,29 +26,29 @@ Time: The game progresses through Day, Dawn, and Night cycles, affecting actions
 The solution follows a standard Monorepo structure with a clear separation of concerns using a Vite/React Frontend and a Node/Express Backend.
 
 ## Getting Started
-Prerequisites
-Node.js (v20+ recommended)
+### Prerequisites
+- Node.js (v20+ recommended)
+- npm
 
-npm
+### Installation and Running
+1. Clone the Repository:
 
-Installation and Running
-Clone the Repository:
-
-Bash
-
-git clone [Your Repo URL]
+```
+git clone this repo
 cd my-web-board-game
-Install Dependencies:
+```
+2. Install Dependencies:
 
-Bash
-
+```
 npm install # (Install root dependencies if you have them)
 npm install --prefix backend
 npm install --prefix frontend
-Start the API Server and Client (Monorepo Setup):
+```
+3. Start the API Server and Client (Monorepo Setup):
 
-Bash
-
+```
 # Run the main script defined in your root package.json
-npm start 
-(Typically runs: npm run start:api and npm run start:client concurrently)
+npm start
+```
+
+> (Typically runs: npm run start:api and npm run start:client concurrently)
